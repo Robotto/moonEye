@@ -5,16 +5,16 @@
 ****************************************************/
 
 #include <Adafruit_GFX.h>    // Core graphics library
-#include "Adafruit_ILI9340.h" // Hardware-specific library
+#include "Adafruit_ILI9340.h" // Hardware-specific library - Get the ESP8266 compatible fork from here: https://github.com/glennirwin/Adafruit_ILI9340
 #include <SPI.h>
 #include <SD.h>
 
 #include <ESP8266WiFi.h>
 
-const char* ssid     = "nope";
-const char* password = "noooope";
+const char* ssid     = "secret";
+const char* password = "so, secret";
 
-const char* host = "the_IP_of_the_machine_running_your_host_script";
+const char* host = "192.168.0.179"; //could be global, but this is just lan
 const int hostPort = 1337;
 
 #if defined(__SAM3X8E__)
@@ -269,7 +269,7 @@ void getIt()
 // makes loading a little faster.  20 pixels seems a
 // good balance.
 
-#define BUFFPIXEL 20
+#define BUFFPIXEL 20 //we could go crazy with the ram, since were on an ESP8266! with 96K memory, rather than a 328 with only 2K!
 
 void bmpDraw(char *filename, uint16_t x, uint16_t y) {
 
@@ -280,6 +280,7 @@ void bmpDraw(char *filename, uint16_t x, uint16_t y) {
   uint32_t rowSize;               // Not always = bmpWidth; may have padding
   uint8_t  sdbuffer[3*BUFFPIXEL]; // pixel buffer (R+G+B per pixel)
   uint8_t  buffidx = sizeof(sdbuffer); // Current position in sdbuffer
+  //uint16_t  buffidx = sizeof(sdbuffer); // make big, to account for the enormous buffer size!
   boolean  goodBmp = false;       // Set to true on valid header parse
   boolean  flip    = true;        // BMP is stored bottom-to-top
   int      w, h, row, col;
