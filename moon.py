@@ -18,7 +18,7 @@ a=Astral() #instantiate object
 
 print time.ctime(),"startup!"
 
-TCP_IP = '192.168.0.179'
+TCP_IP = '192.168.0.5'
 TCP_PORT = 1337
 BUFFER_SIZE = 20  # Normally 1024, but we want fast response
 
